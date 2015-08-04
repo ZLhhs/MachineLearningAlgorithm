@@ -8,9 +8,36 @@ liangzxdu@foxmail.com
 
 NaiveBayes1.py数据来自于data1.txt，同样位于NaiveBayes文件夹中
 
+Data1.txt 数据描述： 数据如下所示：
 
+是15*3 的一个矩阵，三列分别是x1,x2,y。我们的目标是，由上述15条训练数据，根据朴素贝叶斯算法，计算x1=1,x2=0时，y的输出应该是多少。
 
+数据量很小，本程序主要是为了更好地理解朴素贝叶斯算法。Learning by doing！
 
+程序基本思路：
+1.读数据：
 
+2.数据计数：
 
+3.构建矩阵
 
+4.计算概率
+
+5.进行预测
+
+主要函数剖析：
+1.Read_Data ():
+　　主要工作：从文件data1.txt中读取数据，进行分割(split)，并由str类型转换为int类型，并由list转换为numpy.ndarray，为后续的处理做好准备工作
+　　输入：	文件名（data1.txt）
+　　输出：	一个名为Data 的numpy.ndarray类型矩阵。
+　　
+
+2.Count_Data() :
+　　主要工作：分别统计x1,x2,y的不同值的个数，得到Count_Y, Count_X1, Count_X2，用了			numpy 中的：numpy.bincount() 函数，然后将这三个值返回
+　　输入：	一个名为Data的numpy.ndarray的二维矩阵，其中数据来自于data1.txt，Data			中的每个数据类型是int。
+　　输出：	三个值，分别是Count_Y, Count_X1, Count_X2, 都是int类型
+　　
+3.Creat_Matrix():
+　　主要工作：构建3个矩阵，分别是y计数矩阵，x1-y计数矩阵，x2-y计数矩阵。初始化为			零，随后，一行一行逐一扫描Data矩阵，将统计信息记录在上述三个矩阵中。
+　　　　　　　 最后返回这三个矩阵。
+    输入：	
