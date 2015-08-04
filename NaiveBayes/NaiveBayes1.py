@@ -45,7 +45,46 @@ def Count_Data ( Data ) :
     C_X2 = numpy.array([numpy.bincount( Data[:, 1] )]).shape[1]
     return C_Y,C_X1,C_X2
 
+def Creat_Matrix (Data, Count_Y, Count_X1, Count_X2) :
+    """
+    This function use Data to creat 3 Matrix:Matrix_Y, Matrix_X1Y, Matrix_X2Y
+    first creat 3 zero matrix,then scan the Data and count the number for every matrix
+    :return:3 matrix,they are Matrix_Y(1*2), Matrix_X1Y(3*2), Matrix_X2Y(3*2)
+    """
+    Matrix_Y   = numpy.zeros( shape = (1,Count_Y) )
+    Matrix_X1Y = numpy.zeros( shape = (Count_X1,Count_Y) )
+    Matrix_X2Y = numpy.zeros( shape = (Count_X2,Count_Y) )
+    #print Matrix_Y
+    #print Matrix_Y[0][0],Matrix_Y[0][1]
+    for key in Data :
+        Matrix_Y[0][key[-1]] += 1
+        Matrix_X1Y[key[0]][key[-1]] += 1
+        Matrix_X2Y[key[1]][key[-1]] += 1
+    print Matrix_Y,Matrix_X1Y,Matrix_X2Y
+    return Matrix_Y,Matrix_X1Y,Matrix_X2Y
+
+def Calculate_probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y) :
+    """
+    This function is used to calculate the probability just divide by the sum of Y
+    :return:3 matrix ,all is use probablity to replace the count
+    """
+    Matrix_X1Y[:,0] = Matrix_X1Y[:,0] / Matrix_Y[0][0]
+    Matrix_X2Y[:,0] = Matrix_X2Y[:,0] / Matrix_Y[0][0]
+    Matrix_X1Y[:,1] = Matrix_X1Y[:,1] / Matrix_Y[0][1]
+    Matrix_X2Y[:,1] = Matrix_X2Y[:,1] / Matrix_Y[0][1]
+    Matrix_Y = Matrix_Y / numpy.sum(Matrix_Y)
+    print Matrix_Y, Matrix_X1Y, Matrix_X2Y
+    return Matrix_Y, Matrix_X1Y, Matrix_X2Y
+
+def prediction (Matrix_Y, Matrix_X1Y, Matrix_X2Y, test_case) :
+    Py0 = Matrix_Y[0][0] * 
+    Py1 =
+
+
 Data = Read_Data()
 print Data,type(Data)
 Count_Y, Count_X1, Count_X2 = Count_Data( Data )
 print Count_Y,Count_X1,Count_X2
+Matrix_Y,Matrix_X1Y,Matrix_X2Y = Creat_Matrix(Data, Count_Y, Count_X1, Count_X2)
+Calculate_probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y)
+test_case = [1,0]

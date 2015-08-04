@@ -40,4 +40,11 @@ Data1.txt 数据描述： 数据如下所示：
 3.Creat_Matrix():
 　　主要工作：构建3个矩阵，分别是y计数矩阵，x1-y计数矩阵，x2-y计数矩阵。初始化为			零，随后，一行一行逐一扫描Data矩阵，将统计信息记录在上述三个矩阵中。
 　　　　　　　 最后返回这三个矩阵。
-    输入：	
+　　输入：	数据集Data，以及从x1,x2,y中统计出的不同值的个数( Count_Y, Count_X1, 				Count_X2)
+　　输出：	三个统计出的计数矩阵，即：y计数矩阵，x1-y计数矩阵，x2-y计数矩阵（分			别命名为：Matrix_Y, Matrix_X1Y, Matrix_X2y）
+　　
+4.Calculate_probability() :
+　　主要工作：将统计出的三个矩阵：Matrix_Y, Matrix_X1Y, Matrix_X2Y除以对应的y总数，			得到计算贝叶斯时需要用到的概率（用频率近似代替概率）
+　　输入：	三个矩阵（Matrix_Y, Matrix_X1Y, Matrix_X2Y）
+　　输出：    用概率来代替频度的三个矩阵（同样为：Matrix_Y, Matrix_X1Y, Matrix_X2Y）
+　　
