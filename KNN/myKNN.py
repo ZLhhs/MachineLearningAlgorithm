@@ -56,7 +56,7 @@ def solve(train_set, test_set, ans, K) :
         ans.append(get_ans(dis, K))
 
 def get_dis(x, y, k) :
-    return ( abs(x[0]-y[0])**k + abs(x[1]-y[1])**k + abs(x[1]-y[1])**k )
+    return ( abs(x[0]-y[0])**k + abs(x[1]-y[1])**k + abs(x[2]-y[2])**k )
 
 def get_ans (dis, K) :
     c0,c1,c2 = 0,0,0

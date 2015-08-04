@@ -4,7 +4,7 @@
 
 This project is using Python to learning the ML algorithms by myself
 
-It include K-NN,Decision Tree
+It's include K-NN,Decision Tree
 
 Have Fun!
 
