@@ -4,6 +4,8 @@ LiangZHANG
 2015-8-4
 liangzxdu@foxmail.com
 
+关键词：朴素贝叶斯算法，Python+NumPy，拉普拉斯平滑。
+
 这是NaiveBayes1代码文件(NaiveBayes1.py)的设计手册，该代码文件(NaiveBayes.py)与本设计手册(NaiveBayes1_ReadMe.doc)同样位于NaiveBayes文件夹中。
 
 NaiveBayes1.py数据来自于data1.txt，同样位于NaiveBayes文件夹中
@@ -12,6 +14,9 @@ Data1.txt 数据描述： 数据如下所示：
 
 
 是15*3 的一个矩阵，三列分别是x1,x2,y。我们的目标是，由上述15条训练数据，根据朴素贝叶斯算法，计算输入不同的test_case时，y的输出应该是多少。
+
+同时，为了防止概率连乘导致的下溢为0的问题，通过exp，将概率的值域由0~1，映射为1~e
+。并且采用了拉普拉斯平滑方法来处理概率为零的情况。
 
 数据量很小，本程序主要是为了更好地理解朴素贝叶斯算法。Learning by doing！
 
@@ -47,6 +52,7 @@ Data1.txt 数据描述： 数据如下所示：
 　　
 4.Calculate_probability() :
 　　主要工作：将统计出的三个矩阵：Matrix_Y, Matrix_X1Y, Matrix_X2Y除以对应的y总数，			得到计算贝叶斯时需要用到的概率（用频率近似代替概率），至此，朴素贝叶斯			构建（训练）完成。
+　　　　　　　 本函数中运用exp来避免概率连乘导致下溢，将所有的频率值从0~1映射为1~e。
 　　输入：	三个矩阵（Matrix_Y, Matrix_X1Y, Matrix_X2Y）
 　　输出：    用概率来代替频度的三个矩阵（同样为：Matrix_Y, Matrix_X1Y, Matrix_X2Y）
 　　单元测试：OK~
@@ -57,6 +63,15 @@ Data1.txt 数据描述： 数据如下所示：
 　　输入：	三个矩阵（Matrix_Y, Matrix_X1Y, Matrix_X2Y），都是朴素贝叶斯算法学习出			的概率矩阵以及test_case,test_case可根据个	人需求修改
 　　输出：    根据朴素贝叶斯算法算出的概率较大的哪个y值（0或1）
 　　单元测试：OK~
+　　
+　　
+6.Calculate_probability_Laplace_Smooth() :
+　　　主要工作：本函数很像上一个Calculate_Probability()函数，只是在拉普拉斯平滑的基础上，			由统计数值计算对应的概率值，同样使用了指数函数exp来防止连乘导致的下			溢。此函数同样完成朴素贝叶斯的训练。
+　　　　　　　 Ps:拉普拉斯平滑理论最好再看看~
+　　　输入：	三个矩阵（Matrix_Y, Matrix_X1Y, Matrix_X2Y），就是要计算的朴素贝叶斯的			概率矩阵，两个int变量：Count_X1, Count_X2，记录X1,X2有点多少个不同			的值，用来参与拉普拉斯平滑。
+　　　输出：	计算好后的三个概率矩阵(Matrix_Y, Matrix_X1Y, Matrix_X2Y)
+　　　单元测试：OK~
+
 　　
 
 

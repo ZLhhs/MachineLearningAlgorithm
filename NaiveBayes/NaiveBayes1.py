@@ -57,21 +57,45 @@ def Creat_Matrix (Data, Count_Y, Count_X1, Count_X2) :
     #print Matrix_Y,Matrix_X1Y,Matrix_X2Y
     return Matrix_Y,Matrix_X1Y,Matrix_X2Y
 
-def Calculate_probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y) :
+def Calculate_Probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y) :
     """
     This function is used to calculate the probability just divide by the sum of Y(Matrix_Y)
     :return:3 matrix : Matrix_Y, Matrix_X1Y, MatrixX2Y,
             all is use probablity to replace the count
     """
-    Matrix_X1Y[:,0] = Matrix_X1Y[:,0] / Matrix_Y[0][0]
-    Matrix_X2Y[:,0] = Matrix_X2Y[:,0] / Matrix_Y[0][0]
-    Matrix_X1Y[:,1] = Matrix_X1Y[:,1] / Matrix_Y[0][1]
-    Matrix_X2Y[:,1] = Matrix_X2Y[:,1] / Matrix_Y[0][1]
-    Matrix_Y = Matrix_Y / numpy.sum(Matrix_Y)
-    #print Matrix_Y, Matrix_X1Y, Matrix_X2Y
+    Matrix_X1Y[:,0] = numpy.exp( Matrix_X1Y[:,0] / Matrix_Y[0][0] )
+    Matrix_X2Y[:,0] = numpy.exp( Matrix_X2Y[:,0] / Matrix_Y[0][0] )
+    Matrix_X1Y[:,1] = numpy.exp( Matrix_X1Y[:,1] / Matrix_Y[0][1] )
+    Matrix_X2Y[:,1] = numpy.exp( Matrix_X2Y[:,1] / Matrix_Y[0][1] )
+    # Here we use exp to avoid underflow to zero
+    # Matrix_Y = Matrix_Y / numpy.sum(Matrix_Y)
+    print '3 matrix is :\n',Matrix_Y
+    print Matrix_X1Y
+    print Matrix_X2Y
     return Matrix_Y, Matrix_X1Y, Matrix_X2Y
 
-def prediction (Matrix_Y, Matrix_X1Y, Matrix_X2Y, test_case) :
+def Calculate_Probability_Laplace_Pmooth (Matrix_Y, Matrix_X1Y, Matrix_X2Y, Count_X1, Count_X2) :
+    """
+    This function is used to calculate the probability by the Laplace smooth
+    compare with just divide by the sum of Y( Function Calculate_Probability() )
+    :return:3 matrix : Matrix_Y, Matrix_X1Y, MatrixX2Y,
+            all is use probablity to replace the count
+    """
+    Matrix_X1Y += 1  # <---  Laplace smooth
+    Matrix_X2Y += 1
+    Matrix_X1Y[:,0] = numpy.exp( Matrix_X1Y[:,0] / (Matrix_Y[0][0]+Count_X1) )
+    Matrix_X2Y[:,0] = numpy.exp( Matrix_X2Y[:,0] / (Matrix_Y[0][0]+Count_X2) )
+    Matrix_X1Y[:,1] = numpy.exp( Matrix_X1Y[:,1] / (Matrix_Y[0][1]+Count_X1) )
+    Matrix_X2Y[:,1] = numpy.exp( Matrix_X2Y[:,1] / (Matrix_Y[0][1]+Count_X2) )
+    # Here we use exp to avoid underflow to zero;
+    # add count_X is to Laplace smooth
+    Matrix_Y += 1 # add one to Matrix_Y at least
+    print '3 matrix is :\n',Matrix_Y
+    print Matrix_X1Y
+    print Matrix_X2Y
+    return Matrix_Y, Matrix_X1Y, Matrix_X2Y
+
+def Prediction (Matrix_Y, Matrix_X1Y, Matrix_X2Y, test_case) :
     """
     This function prediction the test_case use NaiveBayes Algorithm
     and just return the label which one is bigger
@@ -80,6 +104,7 @@ def prediction (Matrix_Y, Matrix_X1Y, Matrix_X2Y, test_case) :
     Py0 = Matrix_Y[0][0] * Matrix_X1Y[test_case[0]][0] * Matrix_X2Y[test_case[1]][0]
     Py1 = Matrix_Y[0][1] * Matrix_X1Y[test_case[0]][1] * Matrix_X2Y[test_case[1]][1]
     # Naive Bayes Algorithm
+    print 'here the Py0,Py1 = ',Py0,Py1
     return 0 if Py0 > Py1 else 1
 
 
@@ -88,7 +113,8 @@ print 'Data:\n',Data,type(Data)
 Count_Y, Count_X1, Count_X2 = Count_Data( Data )
 #print Count_Y,Count_X1,Count_X2
 Matrix_Y,Matrix_X1Y,Matrix_X2Y = Creat_Matrix(Data, Count_Y, Count_X1, Count_X2)
-Matrix_Y,Matrix_X1Y,Matrix_X2Y = Calculate_probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y)
+#Matrix_Y,Matrix_X1Y,Matrix_X2Y = Calculate_Probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y)
+Matrix_Y,Matrix_X1Y,Matrix_X2Y = Calculate_Probability_Laplace_Pmooth (Matrix_Y, Matrix_X1Y, Matrix_X2Y, Count_X1, Count_X2)
 test_case = [1,1] # user can change the test_case if necessary
 print '\nfor test_case',test_case,',our prediction is :',\
-    prediction (Matrix_Y, Matrix_X1Y, Matrix_X2Y, test_case)
+    Prediction (Matrix_Y, Matrix_X1Y, Matrix_X2Y, test_case)
