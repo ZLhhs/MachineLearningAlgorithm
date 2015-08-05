@@ -10,41 +10,59 @@ NaiveBayes1.py数据来自于data1.txt，同样位于NaiveBayes文件夹中
 
 Data1.txt 数据描述： 数据如下所示：
 
-是15*3 的一个矩阵，三列分别是x1,x2,y。我们的目标是，由上述15条训练数据，根据朴素贝叶斯算法，计算x1=1,x2=0时，y的输出应该是多少。
+
+是15*3 的一个矩阵，三列分别是x1,x2,y。我们的目标是，由上述15条训练数据，根据朴素贝叶斯算法，计算输入不同的test_case时，y的输出应该是多少。
 
 数据量很小，本程序主要是为了更好地理解朴素贝叶斯算法。Learning by doing！
 
 程序基本思路：
 1.读数据：
-
 2.数据计数：
-
 3.构建矩阵
-
 4.计算概率
-
 5.进行预测
 
 主要函数剖析：
 1.Read_Data ():
-　　主要工作：从文件data1.txt中读取数据，进行分割(split)，并由str类型转换为int类型，并由list转换为numpy.ndarray，为后续的处理做好准备工作
+　　主要工作：从文件data1.txt中读取数据，进行分割(split)，并由str类型转换为int类型，并			由list转换为numpy.ndarray，为后续的处理做好准备工作
 　　输入：	文件名（data1.txt）
 　　输出：	一个名为Data 的numpy.ndarray类型矩阵。
+　　单元测试：OK~
 　　
 
 2.Count_Data() :
 　　主要工作：分别统计x1,x2,y的不同值的个数，得到Count_Y, Count_X1, Count_X2，用了			numpy 中的：numpy.bincount() 函数，然后将这三个值返回
 　　输入：	一个名为Data的numpy.ndarray的二维矩阵，其中数据来自于data1.txt，Data			中的每个数据类型是int。
 　　输出：	三个值，分别是Count_Y, Count_X1, Count_X2, 都是int类型
+　　单元测试：OK~
+　　
 　　
 3.Creat_Matrix():
 　　主要工作：构建3个矩阵，分别是y计数矩阵，x1-y计数矩阵，x2-y计数矩阵。初始化为			零，随后，一行一行逐一扫描Data矩阵，将统计信息记录在上述三个矩阵中。
 　　　　　　　 最后返回这三个矩阵。
 　　输入：	数据集Data，以及从x1,x2,y中统计出的不同值的个数( Count_Y, Count_X1, 				Count_X2)
 　　输出：	三个统计出的计数矩阵，即：y计数矩阵，x1-y计数矩阵，x2-y计数矩阵（分			别命名为：Matrix_Y, Matrix_X1Y, Matrix_X2y）
+　　单元测试：OK~
+　　
 　　
 4.Calculate_probability() :
-　　主要工作：将统计出的三个矩阵：Matrix_Y, Matrix_X1Y, Matrix_X2Y除以对应的y总数，			得到计算贝叶斯时需要用到的概率（用频率近似代替概率）
+　　主要工作：将统计出的三个矩阵：Matrix_Y, Matrix_X1Y, Matrix_X2Y除以对应的y总数，			得到计算贝叶斯时需要用到的概率（用频率近似代替概率），至此，朴素贝叶斯			构建（训练）完成。
 　　输入：	三个矩阵（Matrix_Y, Matrix_X1Y, Matrix_X2Y）
 　　输出：    用概率来代替频度的三个矩阵（同样为：Matrix_Y, Matrix_X1Y, Matrix_X2Y）
+　　单元测试：OK~
+
+
+5.Prediction():
+　　主要工作：朴素贝叶斯已经在上述函数中完成了构建，本函数主要是用构建好的朴素贝叶			斯进行预测，测试数据为test_case = [1, 0]，即x1 = 1, x2 = 0，（用户可修改）通			过朴素贝叶斯来计算y=1和y=0的概率，哪个概率大我们就将test_case分到哪			一类(0/1)。
+　　输入：	三个矩阵（Matrix_Y, Matrix_X1Y, Matrix_X2Y），都是朴素贝叶斯算法学习出			的概率矩阵以及test_case,test_case可根据个	人需求修改
+　　输出：    根据朴素贝叶斯算法算出的概率较大的哪个y值（0或1）
+　　单元测试：OK~
+　　
+
+
+附录：纸质设计文档电子照片
+
+
+　　
+
 　　
