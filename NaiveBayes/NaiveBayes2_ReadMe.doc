@@ -1,0 +1,13 @@
+NaiveBayes2_ReadMe.doc
+LiangZHANG
+2015-8-6
+Liangzxdu@foxmail.com
+
+关键词：朴素贝叶斯算法，文档分类
+
+这是NaiveBayes2.py代码文件的设计手册，该代码文件（NaiveBayes2.py）和本设计手册（NaiveBayes2_ReadMe.doc）同样位于NaiveBayes文件夹中。
+
+NaiveBayes2.py的数据（邮件数据）来自于data2文件夹（同样位于NaiveBayes Project文件夹中），数据如下所示：
+
+第一行的0/1表示该文本是否为垃圾邮件(0为垃圾邮件，1为正常邮件)
+从第二行到最后都是邮件正文
