@@ -11,3 +11,44 @@ NaiveBayes2.pyµÄÊý¾Ý£¨ÓÊ¼þÊý¾Ý£©À´×ÔÓÚdata2ÎÄ¼þ¼Ð£¨Í¬ÑùÎ»ÓÚNaiveBayes ProjectÎÄ¼
 
 µÚÒ»ÐÐµÄ0/1±íÊ¾¸ÃÎÄ±¾ÊÇ·ñÎªÀ¬»øÓÊ¼þ(0ÎªÀ¬»øÓÊ¼þ£¬1ÎªÕý³£ÓÊ¼þ)
 ´ÓµÚ¶þÐÐµ½×îºó¶¼ÊÇÓÊ¼þÕýÎÄ
+
+Í¬Ê±ÎªÁË·ÀÖ¹Í³¼ÆÊý¾Ý²»×ãµ¼ÖÂµÄ¸ÅÂÊÖµÎªÁãµÄÇé¿ö£¬ÎÒÃÇ²ÉÓÃLaplace SmoothÀ´±ÜÃâ£¨Ò»¿ªÊ¼Ã»ÓÃ£¬ÕýÈ·ÂÊÊÇ90%£©¡£Í¬Ê±£¬Ê¹ÓÃexp/logÀ´½øÐÐ¸ÅÂÊÖµÓ³Éä£¬·ÀÖ¹Á¬³Ëµ¼ÖÂµÄÏÂÒçÎªÁã¡£
+
+³ÌÐòµÄ»ù±¾Ë¼Â·£º
+1.É¨ÃèÈ«ÎÄµ±£¬¹¹½¨´Êµä£¨µ¥¶ÀÐ´Ò»¸ö¹ýÂËº¯Êý£¬ºóÃæÒ²»áÓÃµ½£©
+2.¹¹½¨²ÎÊý¾ØÕó
+3.¹¹½¨¸ÅÂÊ¾ØÕó£¨Laplace_Smooth and exp/log£©
+4.»ùÓÚ²âÊÔ¼¯½øÐÐ²âÊÔ£¨Prediction£©
+
+Ö÷Òªº¯ÊýÆÊÎö£º
+1.Scan_Text() :
+¡¡¡¡Ö÷Òª¹¤×÷£º¶ÔÕû¸öÎÄ±¾¼¯ºÏÖÐµÄËùÓÐÎÄ±¾£¨À´×Ô¡°data2ÎÄ¼þ¼Ð¡±£©½øÐÐÉ¨Ãè£¬Ô¤´¦Àí£¨¹ý			ÂËº¯ÊýFilter£©ºó£¬°´¿Õ¸ñ½øÐÐÇÐ·Ö£¨split£©£¬µÃµ½´Ê±í/´Êµä£¬×îÖÕµÃµ½Ò»¸öÅÅ			ºÃÐòµÄlist
+¡¡¡¡ÊäÈë£º	NULL£¨»òÕßÒ²¿ÉÒÔÊÇÂ·¾¶µØÖ·£©
+¡¡¡¡Êä³ö£º	Ò»¸öÅÅºÃÐòµÄlist´ÊµäL£¬»ã¼¯ÁËËùÓÐÎÄ±¾ÖÐµÄÈ«²¿µ¥´Ê
+¡¡¡¡
+2.Filter() :
+¡¡¡¡Ö÷Òª¹¤×÷£º¶ÔÓÚÊäÈëµÄ×Ö·û´®£¬¹ýÂËµôÆäÖÐµÄÊý×Ö£¬±êµã·ûºÅ£¬²¢½«´óÐ´×ÖÄ¸×ª»»³ÉÐ¡Ð´			ÐÎÊ½£¬±ãÓÚºóÆÚµÄ´¦Àí£¨ÓÉÓÚpythonÖÐ×Ö·û´®ÊÇ²»¿É±äµÄ£¬ËùÒÔÐèÒª½«×Ö·û´®			ÏÈ×ª»»Îªlist£¬´¦ÀíÍêºóÔÙ´Ólist×ª»»»Ø×Ö·û´®£¬×îÖÕ·µ»Ø¸Ã×Ö·û´®£©
+¡¡¡¡ÊäÈë£º	´ý¹ýÂËµÄ×Ö·û´®str
+¡¡¡¡Êä³ö£º	¹ýÂËÖ®ºóµÄ×Ö·û´®str¡¯
+
+3.Create_Matrix():
+¡¡¡¡Ö÷Òª¹¤×÷£º¶ÔÑµÁ·Êý¾Ý¼¯£¨data2/TrainSet£©½øÐÐÉ¨Ãè£¬¶ÔÃ¿Ò»¸öÎÄµµ£¬¶ÁÈ¡ºó£¬ÓÃFilter				¹ýÂË£¬µÃµ½¸ÃÎÄµµ°üº¬µÄµ¥´ÊµÄlist¡£Ëæºó¶ÔlistÖÐµÄÃ¿¸öµ¥´Ê£¬Ã¿³öÏÖÒ»´Î£¬			±ãÔÚ¼ÆÊý¾ØÕóÖÐ½«Æä¼ÆÊý¼ÓÒ»¡£ÓÐÁ½¸ö¼ÆÊý¾ØÕó£¬·Ö±ðÊÇy¼ÆÊý¾ØÕóºÍword-y			¼ÆÊý¾ØÕó(size : 1*2 and len(L)*2)£¬×îºó·µ»ØÕâÁ½¸ö¼ÆÊý¾ØÕó¡£
+¡¡¡¡ÊäÈë£º	´ÊµäL
+¡¡¡¡Êä³ö£º	Á½¸ö¼ÆÊý¾ØÕó(Matrix_Y and Matrix_WordY)£¬·Ö±ðÊÇ1*2ºÍlen(L)*2
+¡¡¡¡
+4.Calculate_Probability() :
+¡¡¡¡Ö÷Òª¹¤×÷£º ÓÉÉÏÒ»²½µÃµ½µÄ¼ÆÊýº¯Êý¼ÆËã¸÷¸ö´ÊÏî³öÏÖµÄ¸ÅÂÊ£¨Ö±½Ó³ýÒÔ³öÏÖµÄ×ÜÊý¼´¿É£©£¬			Í¬Ê±½øÐÐLaplace_SmoothºÍlog/expÓ³Éä£¨NaiveBayes2.py´úÂëÖÐ»¹Ã»½øÐÐ£©
+¡¡¡¡ÊäÈë£º	´ÊµäL£¬word-y¼ÆÊý¾ØÕó£¨Matrix_WordY£©
+¡¡¡¡Êä³ö£º	word-y¸ÅÂÊ¾ØÕó£¨Í¬ÑùÊÇMatrix_WordY£©
+
+5.Prediction() :
+¡¡¡¡Ö÷Òª¹¤×÷£º´Ó²âÊÔ¼¯ÖÐ(data2/TestSet)¶ÁÈ¡Êý¾Ý£¬Ô¤´¦Àíºó(Filter¹ýÂË)£¬¸ù¾ÝÉÏÃæµÃµ½µÄ				word-y¸ÅÂÊ¾ØÕó£¬Í¨¹ýÆÓËØ±´Ò¶Ë¹Ëã·¨À´¼ÆËãP0ºÍP1µÄ¸ÅÂÊ£¨Á¬³Ë£©£¬²¢½«			ÎÄµµ·Öµ½¸ÅÂÊ´óµÄÄÇ¸öÀà±ðÖÐ¡£²¢ÇÒÓëflag½øÐÐ¶Ô±È(flagÊÇÎÄµµµÄµÚÒ»ÐÐ£¬ÊÇ			ÆäÓ¦¸Ã±»·Öµ½µÄÀà±ð£¬0/1)£¬Ã¿µ±flagÓëÆÓËØ±´Ò¶Ë¹Ëã·¨µÃ³öµÄÖµ²»ÏàµÈ£¬				count_wrong±ã¼ÓÒ»£¬×îÖÕÓÃcount_wrong/count_all£¬µÃµ½Îó·ÖÂÊ¡£
+¡¡¡¡ÊäÈë£º    Á½¸öÉÏÃæÍ³¼Æ³öµÄ¸ÅÂÊ¾ØÕó¾ØÕó£¬·Ö±ðÊÇMatrix_Y£¬Matrix_WordY£¬ÓÃÀ´²ÎÓë			ÆÓËØ±´Ò¶Ë¹Ëã·¨£¬Ô¤²âÎÄµµµÄ·ÖÀà¡£
+¡¡¡¡Êä³ö£º    NULL£¬µ¹ÊÇ»áÍ¨¹ýÆÁÄ»´òÓ¡³öÎó·ÖÂÊ
+¡¡¡¡
+¡¡¡¡
+Ps:ÔÝÊ±Î´Ê¹ÓÃLaplace_SmoothºÍexp/logÓ³Éä£¬µ±Ç°µÄÎó·ÖÂÊÊÇ10%£¬Ê¹ÓÃºóÓ¦¸Ã»á¸üµÍ¡ª¡ª2015-8-7-16:50
+
+¸½Â¼£ºÖ½ÖÊ°æÉè¼ÆÎÄµµµç×ÓÕÕÆ¬£º
+
+

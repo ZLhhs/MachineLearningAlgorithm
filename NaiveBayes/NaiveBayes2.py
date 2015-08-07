@@ -88,7 +88,7 @@ def Calculate_Probability (L, Matrix_WordY) :
     Matrix_WordY[:, 0] /= count_word0
     Matrix_WordY[:, 1] /= count_word1
     print Matrix_WordY
-    # without Laplace smooth and exp/log -
+    # without Laplace smooth and exp/log -------
     return Matrix_WordY
 
 def Prediction (Matrix_Y, Matrix_WordY) :
@@ -116,7 +116,7 @@ def Prediction (Matrix_Y, Matrix_WordY) :
         pre_ans = 0 if P0>P1 else 1
         print 'predicition is :', pre_ans
         print 'real ans is:', int(flag)
-        if int(flag)!=pre_ans : # predoction os wrong
+        if int(flag)!=pre_ans : # predoction is wrong
             print line
             count_wrong += 1
     print float(count_wrong)/count_all

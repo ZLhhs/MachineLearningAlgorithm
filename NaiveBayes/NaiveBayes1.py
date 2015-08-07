@@ -111,9 +111,9 @@ def Prediction (Matrix_Y, Matrix_X1Y, Matrix_X2Y, test_case) :
 Data = Read_Data()
 print 'Data:\n',Data,type(Data)
 Count_Y, Count_X1, Count_X2 = Count_Data( Data )
-#print Count_Y,Count_X1,Count_X2
+# print Count_Y,Count_X1,Count_X2
 Matrix_Y,Matrix_X1Y,Matrix_X2Y = Creat_Matrix(Data, Count_Y, Count_X1, Count_X2)
-#Matrix_Y,Matrix_X1Y,Matrix_X2Y = Calculate_Probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y)
+# Matrix_Y,Matrix_X1Y,Matrix_X2Y = Calculate_Probability (Matrix_Y, Matrix_X1Y, Matrix_X2Y)
 Matrix_Y,Matrix_X1Y,Matrix_X2Y = Calculate_Probability_Laplace_Pmooth (Matrix_Y, Matrix_X1Y, Matrix_X2Y, Count_X1, Count_X2)
 test_case = [1,1] # user can change the test_case if necessary
 print '\nfor test_case',test_case,',our prediction is :',\
