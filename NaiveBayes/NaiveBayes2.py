@@ -71,6 +71,14 @@ def Create_Matrix (L) :
         Matrix_Y[0][int(flag)] += 1
     print Matrix_Y
     print Matrix_WordY
+    #print numpy.array( [L] ).T
+
+    for i in range( len(L) ) : # be sure,the numpy.array must be double float
+        if Matrix_WordY[i][0]>3 or Matrix_WordY[i][1]>3 :
+            print L[i],Matrix_WordY[i]
+
+    #print numpy.hstack( [numpy.array([L]).T,Matrix_WordY] )
+
     return Matrix_Y, Matrix_WordY
 
 def Calculate_Probability (L, Matrix_WordY) :
@@ -85,8 +93,12 @@ def Calculate_Probability (L, Matrix_WordY) :
     count_word0 = numpy.sum( Matrix_WordY[:,0] )
     count_word1 = numpy.sum( Matrix_WordY[:,1] )
     #print count_word,count_word0,count_word1
-    Matrix_WordY[:, 0] /= count_word0
-    Matrix_WordY[:, 1] /= count_word1
+    #Matrix_WordY[:, 0] /= count_word0
+    #Matrix_WordY[:, 1] /= count_word1
+
+    Matrix_WordY[:,0] = ( Matrix_WordY[:,0]+1 )/ (count_word0 + count_word)
+    Matrix_WordY[:,1] = ( Matrix_WordY[:,1]+1 )/ (count_word1 + count_word)
+    Matrix_WordY = numpy.exp( Matrix_WordY )
     print Matrix_WordY
     # without Laplace smooth and exp/log -------
     return Matrix_WordY
@@ -116,8 +128,11 @@ def Prediction (Matrix_Y, Matrix_WordY) :
         pre_ans = 0 if P0>P1 else 1
         print 'predicition is :', pre_ans
         print 'real ans is:', int(flag)
-        if int(flag)!=pre_ans : # predoction is wrong
+        if int(flag) != pre_ans : # predoction is wrong
             print line
+            arr = line.split()
+            for key in arr :
+                print key,Matrix_WordY[L.index(key)][0],Matrix_WordY[L.index(key)][1]
             count_wrong += 1
     print float(count_wrong)/count_all
 

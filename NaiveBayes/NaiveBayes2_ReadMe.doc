@@ -47,8 +47,11 @@ NaiveBayes2.pyµÄÊý¾Ý£¨ÓÊ¼þÊý¾Ý£©À´×ÔÓÚdata2ÎÄ¼þ¼Ð£¨Í¬ÑùÎ»ÓÚNaiveBayes ProjectÎÄ¼
 ¡¡¡¡Êä³ö£º    NULL£¬µ¹ÊÇ»áÍ¨¹ýÆÁÄ»´òÓ¡³öÎó·ÖÂÊ
 ¡¡¡¡
 ¡¡¡¡
-Ps:ÔÝÊ±Î´Ê¹ÓÃLaplace_SmoothºÍexp/logÓ³Éä£¬µ±Ç°µÄÎó·ÖÂÊÊÇ10%£¬Ê¹ÓÃºóÓ¦¸Ã»á¸üµÍ¡ª¡ª2015-8-7-16:50
+Ps1:ÔÝÊ±Î´Ê¹ÓÃLaplace_SmoothºÍexp/logÓ³Éä£¬µ±Ç°µÄÎó·ÖÂÊÊÇ10%£¬Ê¹ÓÃºóÓ¦¸Ã»á¸üµÍ¡ª¡ª2015-8-7-16:50
+
+Ps2:Ê¹ÓÃÁËLaplace_SmoothºÍexp/logÓ³Éä£¬È»¶øÎó·ÖÂÊ»¹ÊÇ10%£¬Í¦ÒÉ»óµÄ£¬¸Ð¾õÊÇÑµÁ·Êý¾ÝÌ«ÉÙµÄÔµ¹Ê¡£2015-8-11
+
+Ps3:È¥³ýÍ£ÓÃ´Êºó¿ÉÄÜÎó·ÖÂÊ»áÏÂ½µ¡£2015-8-11
 
 ¸½Â¼£ºÖ½ÖÊ°æÉè¼ÆÎÄµµµç×ÓÕÕÆ¬£º
-
 
