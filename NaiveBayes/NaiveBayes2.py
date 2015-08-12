@@ -23,20 +23,24 @@ def Scan_Text () :
             s = ''.join( file_read.readlines() )
             # read_lines() return a list with string in it (a line a string constitute a list)
             s = Filter(s)
-            #must be filter here,before split,input a str and output a str
-            L += (s.split()) # use += not the append
+            #must be filter here,before split,input a str and output a list
+            L += s # use += not the append
+            #print "here L=:",L
     L = list(set(L)) # change to set to except the same then back to list
     L.sort()
-    print L
+    #print "this is L:"
+    #for key in L :
+     #   print key
     return L
-
 
 
 def Filter ( S ) :
     """
     This function get a string and filter all the numbers,symbols
-    and put all the characters in low case then return a string
-    :return: A string which has been filtration(without number,symbol and upper case)
+    and put all the characters in low case then return a list
+    and remove the stop word.
+    :return: A list which has been filtration
+            (without number,symbol and upper case and remove stop_words)
     """
     S = list(S)# because String is unchangeable,so we use list
     for i in range(len(S)) : # list can change
@@ -46,8 +50,33 @@ def Filter ( S ) :
         else :
             S[i] = ' '
     S = ''.join(S) #from list to str
-    return S # return a str
+    S_arr = S.split()
+    S_arr = Remove_Stop_Word( S_arr ) # input list and return list
+    return S_arr # return a list
 
+
+def Remove_Stop_Word( S ):
+    """
+    This function receive a list (just the context of E-mail) and remove the stop_word
+    in the list (using stop_words list) then,return the new list (without the stop_word)
+    :return:a list without stop_word in it.
+    """
+    S_arr = S
+    #print "before:",S_arr
+    stop_words = \
+    ["a"  ,"an"   ,"and"  ,"are" ,"as"  ,"at"  ,
+     "be" ,"for"  ,"from" ,"has" ,"have","in"  ,
+     "is" ,"it"   ,"of"   ,"on"  ,"or"  ,"that",
+     "the","there","these","this","to"  ,"up"  ,
+     "was","we"   ,"will" ,"with","you" ,"your",
+     "am" ,"but"  ,"by"   ,"x"   ,"s"   ,"c"   ]
+    #stop_words = []
+    for stop_word in stop_words :
+        if stop_word in S_arr :
+            S_arr = [key for key in S_arr if key!=stop_word]
+            #S_arr.remove(key)  # this is wrong and upper line is right!
+    #print "after :",S_arr
+    return S_arr
 
 def Create_Matrix (L) :
     """
@@ -60,24 +89,19 @@ def Create_Matrix (L) :
     Matrix_WordY = numpy.zeros( shape = (len(L), 2) )
     address = 'data2/TrainSet'
     for file in os.listdir( address ) :
-        print address+'/'+file
+        #print address+'/'+file
         file_read = open(address+'/'+file)
         flag = file_read.readline().strip() # cut the whitespace at the end or first
         line = ''.join( file_read.readlines() )
-        line = Filter(line)  #print line
-        l = line.split()  #print l
+        l = Filter(line)  #print line
+        #l = line.split()  #print l
         for key in l :
             Matrix_WordY[L.index(key)][int(flag)] += 1
         Matrix_Y[0][int(flag)] += 1
     print Matrix_Y
     print Matrix_WordY
-    #print numpy.array( [L] ).T
-
-    for i in range( len(L) ) : # be sure,the numpy.array must be double float
-        if Matrix_WordY[i][0]>3 or Matrix_WordY[i][1]>3 :
-            print L[i],Matrix_WordY[i]
-
-    #print numpy.hstack( [numpy.array([L]).T,Matrix_WordY] )
+    for i in range(len(L)) :
+        print L[i],Matrix_WordY[i][0],Matrix_WordY[i][1]
 
     return Matrix_Y, Matrix_WordY
 
@@ -93,14 +117,15 @@ def Calculate_Probability (L, Matrix_WordY) :
     count_word0 = numpy.sum( Matrix_WordY[:,0] )
     count_word1 = numpy.sum( Matrix_WordY[:,1] )
     #print count_word,count_word0,count_word1
-    #Matrix_WordY[:, 0] /= count_word0
-    #Matrix_WordY[:, 1] /= count_word1
 
-    Matrix_WordY[:,0] = ( Matrix_WordY[:,0]+1 )/ (count_word0 + count_word)
-    Matrix_WordY[:,1] = ( Matrix_WordY[:,1]+1 )/ (count_word1 + count_word)
+    Matrix_WordY[:, 0] /= count_word0
+    Matrix_WordY[:, 1] /= count_word1
+
+    #Matrix_WordY[:,0] = ( Matrix_WordY[:,0]+1 )/ (count_word0 + count_word) #this is Laplace Smooth
+    #Matrix_WordY[:,1] = ( Matrix_WordY[:,1]+1 )/ (count_word1 + count_word)
     Matrix_WordY = numpy.exp( Matrix_WordY )
+
     print Matrix_WordY
-    # without Laplace smooth and exp/log -------
     return Matrix_WordY
 
 def Prediction (Matrix_Y, Matrix_WordY) :
@@ -116,25 +141,27 @@ def Prediction (Matrix_Y, Matrix_WordY) :
         file_read = open(address+'/'+file)
         flag = file_read.readline().strip()
         line = ''.join( file_read.readlines() )
-        line = Filter(line)
-        l = line.split()
+        l = Filter(line)
+        #l = line.split()
         print l
         P0 = Matrix_Y[0][0] ; P1 = Matrix_Y[0][1]
-        print P0, P1
         for key in l :
             P0 *= Matrix_WordY[L.index(key)][0]
             P1 *= Matrix_WordY[L.index(key)][1]
-        print P0, P1
+        print "NO:",P0,"   YES:", P1
         pre_ans = 0 if P0>P1 else 1
-        print 'predicition is :', pre_ans
-        print 'real ans is:', int(flag)
-        if int(flag) != pre_ans : # predoction is wrong
-            print line
-            arr = line.split()
-            for key in arr :
+        print 'Predicition is :', pre_ans
+        print 'The real ans is:', int(flag)
+        print
+        if int(flag) != pre_ans : # if the predoction is wrong,do this
+            print address+'/'+file
+            print "\n\n-------The Prediction is wrong!-------\n"
+            print l
+            for key in l :
                 print key,Matrix_WordY[L.index(key)][0],Matrix_WordY[L.index(key)][1]
             count_wrong += 1
-    print float(count_wrong)/count_all
+            print "-----------------------------------------"
+    print "\nThe error rate is :",float(count_wrong)/count_all
 
 
 
