@@ -1,0 +1,43 @@
+LogisticRegression 详细设计手册
+LiangZHANG
+2015-8-13
+Liangzxdu@foxmail.com
+
+关键词：逻辑斯特回归、梯度下降、向量化、正则化
+
+这是LogisticRegression.py代码的详细设计手册，该代码文件(LogisticRegression.py)和本文档(LogisticRegression.doc)同样位于LogisticRegression文件夹下。
+
+LogisticRegression.py的数据来源于LogisticRegression文件夹下的data文件夹，其中包括训练集：train.txt和测试集：test.txt。
+数据描述如下：
+     每行数据都有22列，前21列是特征，即：x1,x2,x3,...,x21.最后一列代表y，即正样本或	负样本。
+
+
+暂时没考虑正则化防止过拟合以及随机梯度下降算法（先实现最简单的再说，一步一步来）。
+注意向量化，增强程序的可读性，同时也提高运行效率。
+
+基本思路：
+1. 读取训练数据和测试数据，得到Xrain, Ytrain, Xtest, Ytest （要加工下，方便后面使用）
+2. LogisticRegression 初始化，设定theta。同时设置学习速率alpha，正则化开关/系数lambda
+3. 梯度下降算法，即逻辑斯特回归学习过程，最优化theta。在使用的是批量梯度下降，没考虑随机梯度下降和正则化防过拟合
+4.在测试集上进行测试，计算出正确率。
+
+主要函数剖析：
+1.Read_Data :
+　　主要工作：从数据文件中(LogisticRegression/data下的train.txt和test.txt)读取数据，构造训			练集和测试集.
+　　输入：	NULL，也可以是文件路径地址
+　　输出：	Xtrain, Ytrain, Xtest, Ytest
+
+2.Initialization:
+　　主要工作：初始化算法可能用到的各种参数（也可能直接在外面初始化），比如待学习的参数theta，学习速率alpha，迭代次数N，正则化系数lambda等。
+　　输入：	Xtrain
+　　输出：    初始化的thate（可能加上其他一些参数啥的，暂不确定）
+
+3.Batch_Gradient_Descent () :
+　　主要工作：这行梯度下降算法，优化参数theta
+　　输入：	Xtrain，Ytrain，theta，
+　　输出：
+　　
+4.Predication ():
+　　主要工作：将梯度下降算法训练出的参数值theta带入测试集，计算预测结果，并与真实结果进行比较，得出正确率
+　　输入：	参数theta，Xtest，Ytest
+　　输出：NULL，会打印出分类正确率

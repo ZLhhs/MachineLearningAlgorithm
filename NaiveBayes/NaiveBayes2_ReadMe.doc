@@ -1,4 +1,5 @@
 NaiveBayes2_ReadMe.doc
+
 LiangZHANG
 2015-8-6
 Liangzxdu@foxmail.com
@@ -11,6 +12,7 @@ NaiveBayes2.pyµÄÊý¾Ý£¨ÓÊ¼þÊý¾Ý£©À´×ÔÓÚdata2ÎÄ¼þ¼Ð£¨Í¬ÑùÎ»ÓÚNaiveBayes ProjectÎÄ¼
 
     µÚÒ»ÐÐµÄ0/1±íÊ¾¸ÃÎÄ±¾ÊÇ·ñÎªÀ¬»øÓÊ¼þ(0ÎªÀ¬»øÓÊ¼þ£¬1ÎªÕý³£ÓÊ¼þ)
     ´ÓµÚ¶þÐÐµ½×îºó¶¼ÊÇÓÊ¼þÕýÎÄ
+
 
 Í¬Ê±ÎªÁË·ÀÖ¹Í³¼ÆÊý¾Ý²»×ãµ¼ÖÂµÄ¸ÅÂÊÖµÎªÁãµÄÇé¿ö£¬ÎÒÃÇ²ÉÓÃLaplace SmoothÀ´±ÜÃâ£¨Ò»¿ªÊ¼Ã»ÓÃ£¬ÕýÈ·ÂÊÊÇ90%£¬È»ºóÓÃÁËÖ®ºó£¬·¢ÏÖÒ²ÓÐ±×¶Ë£©¡£Í¬Ê±£¬Ê¹ÓÃexp/logÀ´½øÐÐ¸ÅÂÊÖµÓ³Éä£¬·ÀÖ¹Á¬³Ëµ¼ÖÂµÄÏÂÒçÎªÁã¡£
 
@@ -71,7 +73,6 @@ laplace_smooth	Stop_word	exp	ÕýÈ·ÂÊ
 1	1	1	90%
 
 
-¸½Â¼£ºÖ½ÖÊ°æÉè¼ÆÎÄµµµç×ÓÕÕÆ¬£º
-
+ps£ºÖ½ÖÊ°æÉè¼ÆÎÄµµµç×ÓÕÕÆ¬ÔÚdesign phtotÎÄ¼þ¼ÐÖÐ
 
 
