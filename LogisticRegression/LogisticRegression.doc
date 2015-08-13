@@ -28,16 +28,18 @@ LogisticRegression.pyµÄÊý¾ÝÀ´Ô´ÓÚLogisticRegressionÎÄ¼þ¼ÐÏÂµÄdataÎÄ¼þ¼Ð£¬ÆäÖÐ°üÀ
 ¡¡¡¡Êä³ö£º	Xtrain, Ytrain, Xtest, Ytest
 
 2.Initialization:
-¡¡¡¡Ö÷Òª¹¤×÷£º³õÊ¼»¯Ëã·¨¿ÉÄÜÓÃµ½µÄ¸÷ÖÖ²ÎÊý£¨Ò²¿ÉÄÜÖ±½ÓÔÚÍâÃæ³õÊ¼»¯£©£¬±ÈÈç´ýÑ§Ï°µÄ²ÎÊýtheta£¬Ñ§Ï°ËÙÂÊalpha£¬µü´ú´ÎÊýN£¬ÕýÔò»¯ÏµÊýlambdaµÈ¡£
+¡¡¡¡Ö÷Òª¹¤×÷£º³õÊ¼»¯Ëã·¨¿ÉÄÜÓÃµ½µÄ¸÷ÖÖ²ÎÊý£¨Ò²¿ÉÄÜÖ±½ÓÔÚÍâÃæ³õÊ¼»¯£©£¬±ÈÈç´ýÑ§Ï°µÄ²Î			Êýtheta£¬Ñ§Ï°ËÙÂÊalpha£¬µü´ú´ÎÊýN£¬ÕýÔò»¯ÏµÊýlambdaµÈ¡£
 ¡¡¡¡ÊäÈë£º	Xtrain
 ¡¡¡¡Êä³ö£º    ³õÊ¼»¯µÄthate£¨¿ÉÄÜ¼ÓÉÏÆäËûÒ»Ð©²ÎÊýÉ¶µÄ£¬ÔÝ²»È·¶¨£©
 
 3.Batch_Gradient_Descent () :
-¡¡¡¡Ö÷Òª¹¤×÷£ºÕâÐÐÌÝ¶ÈÏÂ½µËã·¨£¬ÓÅ»¯²ÎÊýtheta
+¡¡¡¡Ö÷Òª¹¤×÷£ºÔËÐÐÌÝ¶ÈÏÂ½µËã·¨£¬ÓÅ»¯²ÎÊýtheta¡£Í¬Ê±Ã¿´Îµü´úºó£¬¸ù¾Ýµ±Ç°theta¼ÆËãÎó²î			Öµ£¨Îó²îº¯Êý£©£¬ÃÜÇÐ¸ú×ÙÌÝ¶ÈÏÂ½µËã·¨£¬²¢ÒÔ´ËÀ´µ÷½Úµü´ú´ÎÊýNºÍÑ§Ï°ËÙ			ÂÊalpha¡£
 ¡¡¡¡ÊäÈë£º	Xtrain£¬Ytrain£¬theta£¬
-¡¡¡¡Êä³ö£º
+¡¡¡¡Êä³ö£º	ÑµÁ·ºÃµÄtheta
 ¡¡¡¡
 4.Predication ():
-¡¡¡¡Ö÷Òª¹¤×÷£º½«ÌÝ¶ÈÏÂ½µËã·¨ÑµÁ·³öµÄ²ÎÊýÖµtheta´øÈë²âÊÔ¼¯£¬¼ÆËãÔ¤²â½á¹û£¬²¢ÓëÕæÊµ½á¹û½øÐÐ±È½Ï£¬µÃ³öÕýÈ·ÂÊ
+¡¡¡¡Ö÷Òª¹¤×÷£º½«ÌÝ¶ÈÏÂ½µËã·¨ÑµÁ·³öµÄ²ÎÊýÖµtheta´øÈë²âÊÔ¼¯£¬¼ÆËãÔ¤²â½á¹û£¬²¢ÓëÕæÊµ½á			¹û½øÐÐ±È½Ï£¬µÃ³öÕýÈ·ÂÊ¡£
 ¡¡¡¡ÊäÈë£º	²ÎÊýtheta£¬Xtest£¬Ytest
 ¡¡¡¡Êä³ö£ºNULL£¬»á´òÓ¡³ö·ÖÀàÕýÈ·ÂÊ
+¡¡¡¡
+Ps:ºóÐø»á¿¼ÂÇËæ»úÌÝ¶ÈÏÂ½µºÍÕýÔò»¯£¬µ±Ç°°æ±¾»¹Ã»ÓÐ
