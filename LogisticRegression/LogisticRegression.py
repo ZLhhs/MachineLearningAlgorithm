@@ -3,7 +3,14 @@ Author :  LiangZHANG
 Date   :  2015-8-13
 E-mail :  Liangzxdu@foxmail.com
 
-Introduction: This program is using the Logistic Regression algorithm to predication
+Introduction: This program is using the Logistic Regression algorithm to predication.
+              We use Gradient descent algorithm to find the best Theta(all ones at first)
+              then using Theta to prediction. N is the times for iteration,
+              alpha is the speed for learning algorithm,lam is the parameter for regularization
+              J is the (value for) cost function.
+              At first,we only use batch gradient descent to optimization theta and
+              the regularization is closed.then we will try random gradient descent
+              to let algorithm become fast and open the regularization.
 """
 
 import numpy
@@ -11,8 +18,9 @@ import matplotlib.pyplot
 
 def Read_Data () :
     """
-
-    :return:
+    This function is reading data from the data directory(just in this project and named "data")
+    From string -> list -> numpy.array,then return the Xtrain, Ytrain, Xtest, Ytest matrix.
+    :return:4 matrix(numpy.array),there are Xtrain, Ytrain, Xtest, Ytest
     """
     address1 = "data/train.txt"
     address2 = "data/test.txt"
@@ -41,16 +49,22 @@ def Read_Data () :
 
 
 def Initialization ( Xtrain ) :
-    theta = numpy.ones( (Xtrain.shape[1] ,1) )
-    theta = numpy.random.rand( Xtrain.shape[1] ,1 )
+    """
+    This is used to initialized theta,and at first Theta is all ones.
+    :return:the Theta which has been initialized to all ones matrix( Xtrain.shape[1]*1 )
+    """
+    theta = numpy.ones( (Xtrain.shape[1] ,1) ) # always  be ones
+    #theta = numpy.random.rand( Xtrain.shape[1] ,1 )
     # all zeros or all ones
     return theta
 
 
 def Batch_Gradient_Descent (N, Xtrain, Ytrain, alpha, theta, lam) :
     """
-
-    :return:
+    This function is learning the best theta using batch gradient descent
+    N is the number of iteration,Xtrain and Ytrain are both the train data,
+    alpha is the speed of learning algorithm,lam is control regularization
+    :return:The best theta we have find~
     """
     m = Xtrain.shape[0]; count_I = []; count_J = [];
     print "------- Before Batch_Gradient_Descent -------"
@@ -64,8 +78,8 @@ def Batch_Gradient_Descent (N, Xtrain, Ytrain, alpha, theta, lam) :
         count_I.append(i)
         count_J.append(J[0][0])
         #break
-    print "count_I:",count_I
-    print "count_J:",count_J
+    #print "count_I:",count_I
+    #print "count_J:",count_J
     #count_I = [1,2,3]
     #count_J = [1,4,9]
     matplotlib.pyplot.plot(count_I, count_J)
@@ -73,12 +87,20 @@ def Batch_Gradient_Descent (N, Xtrain, Ytrain, alpha, theta, lam) :
     return theta
 
 def sigmoid(Xtrain, theta) :
+    """
+    Just the calculate the sigmoid function: y = 1/( 1+exp(-x) ), x=Xtrain*theta
+    """
     #print "in sigmoid:",Xtrain.shape,theta.shape
     #print "the type:Xtrain:",type(Xtrain[1][1]),"",type(theta[1][0])
     temp = -numpy.dot(Xtrain, theta)
     return 1.0/(1+numpy.exp(temp))
 
 def getCost(Xtrain, Ytrain, theta, m) :
+    """
+    Calculate the value of cost function,you can find the formula of J(cost function)
+    in folder 'design_photo' in this project.
+    return the value of J(the cost function)
+    """
     J = numpy.dot( numpy.dot((Ytrain-1).T, Xtrain), theta)
     Z = numpy.dot( Xtrain, theta )
     #print "J shape:",J.shape,"Z shape:",Z.shape
@@ -88,6 +110,9 @@ def getCost(Xtrain, Ytrain, theta, m) :
 
 def Predicition (Xtest, Ytest, theta) :
     """
+    use theta which we have learned before to prediction in the test dataset.
+    just calculate Xtest*theta, if the value is >0 then return 1 else return 0,
+    at least,we calculate the accuracy.
     """
     print "In predicition:",Xtest.shape,Ytest.shape,theta.shape
     pre = numpy.array([[ 1 if x>0 else 0 for x in numpy.dot(Xtest, theta) ]]).T
@@ -99,8 +124,8 @@ def Predicition (Xtest, Ytest, theta) :
 
 
 Xtrain, Ytrain, Xtest, Ytest = Read_Data()
-N = 35000; alpha = 0.0003; lam = 0; #contral
+N = 55000; alpha = 0.0003; lam = 0; # some control parameter
 theta = Initialization( Xtrain )
 theta = Batch_Gradient_Descent(N, Xtrain, Ytrain, alpha, theta, lam)
 Predicition(Xtest, Ytest, theta)
-print "end~"
+print "end~ 76%"
