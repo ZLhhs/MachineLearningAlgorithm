@@ -19,30 +19,32 @@ LogisticRegression.pyµÄÊý¾ÝÀ´Ô´ÓÚLogisticRegressionÎÄ¼þ¼ÐÏÂµÄdataÎÄ¼þ¼Ð£¬ÆäÖÐ°üÀ
 »ù±¾Ë¼Â·£º
 1. ¶ÁÈ¡ÑµÁ·Êý¾ÝºÍ²âÊÔÊý¾Ý£¬µÃµ½Xrain, Ytrain, Xtest, Ytest £¨Òª¼Ó¹¤ÏÂ£¬·½±ãºóÃæÊ¹ÓÃ£©
 2. LogisticRegression ³õÊ¼»¯£¬Éè¶¨theta¡£Í¬Ê±ÉèÖÃÑ§Ï°ËÙÂÊalpha£¬ÕýÔò»¯¿ª¹Ø/ÏµÊýlambda
-3. ÌÝ¶ÈÏÂ½µËã·¨£¬¼´Âß¼­Ë¹ÌØ»Ø¹éÑ§Ï°¹ý³Ì£¬×îÓÅ»¯theta¡£ÔÚÊ¹ÓÃµÄÊÇÅúÁ¿ÌÝ¶ÈÏÂ½µ£¬Ã»¿¼ÂÇËæ»úÌÝ¶ÈÏÂ½µºÍÕýÔò»¯·À¹ýÄâºÏ
+3. ÌÝ¶ÈÏÂ½µËã·¨£¬¼´Âß¼­Ë¹ÌØ»Ø¹éÑ§Ï°¹ý³Ì£¬×îÓÅ»¯theta¡£ÔÚÊ¹ÓÃµÄÊÇÅúÁ¿ÌÝ¶ÈÏÂ½µ£¬Ã»¿¼ÂÇ  Ëæ»úÌÝ¶ÈÏÂ½µºÍÕýÔò»¯·À¹ýÄâºÏ
 4.ÔÚ²âÊÔ¼¯ÉÏ½øÐÐ²âÊÔ£¬¼ÆËã³öÕýÈ·ÂÊ¡£
 
 Ö÷Òªº¯ÊýÆÊÎö£º
 1.Read_Data :
-¡¡¡¡Ö÷Òª¹¤×÷£º´ÓÊý¾ÝÎÄ¼þÖÐ(LogisticRegression/dataÏÂµÄtrain.txtºÍtest.txt)¶ÁÈ¡Êý¾Ý£¬¹¹ÔìÑµ			Á·¼¯ºÍ²âÊÔ¼¯.
+¡¡¡¡Ö÷Òª¹¤×÷£º´ÓÊý¾ÝÎÄ¼þÖÐ(LogisticRegression/dataÏÂµÄtrain.txtºÍtest.txt)¶ÁÈ¡Êý¾Ý£¬¹¹ÔìÑµ			Á·¼¯ºÍ²âÊÔ¼¯.£¨¼ÇµÃÔÚXtrainºÍXtest×î×ó±ß¼ÓÒ»ÁÐ1£©
 ¡¡¡¡ÊäÈë£º	NULL£¬Ò²¿ÉÒÔÊÇÎÄ¼þÂ·¾¶µØÖ·
 ¡¡¡¡Êä³ö£º	Xtrain, Ytrain, Xtest, Ytest
 
 2.Initialization:
-¡¡¡¡Ö÷Òª¹¤×÷£º³õÊ¼»¯Ëã·¨¿ÉÄÜÓÃµ½µÄ¸÷ÖÖ²ÎÊý£¨Ò²¿ÉÄÜÖ±½ÓÔÚÍâÃæ³õÊ¼»¯£©£¬±ÈÈç´ýÑ§Ï°µÄ²Î			Êýtheta£¬Ñ§Ï°ËÙÂÊalpha£¬µü´ú´ÎÊýN£¬ÕýÔò»¯ÏµÊýlambdaµÈ¡£
+¡¡¡¡Ö÷Òª¹¤×÷£º³õÊ¼»¯Ëã·¨¿ÉÄÜÓÃµ½µÄ¸÷ÖÖ²ÎÊý£¨Ò²¿ÉÄÜÖ±½ÓÔÚÍâÃæ³õÊ¼»¯£©£¬±ÈÈç´ýÑ§Ï°µÄ²Î			Êýtheta£¨Î¬¶ÈÒªºÍXtrain Æ¥Åä£¬¼ÓÒ»¸ö1£©£¬Ñ§Ï°ËÙÂÊalpha£¬µü´ú´ÎÊýN£¬Õý			Ôò»¯ÏµÊýlambdaµÈ¡£
 ¡¡¡¡ÊäÈë£º	Xtrain
-¡¡¡¡Êä³ö£º    ³õÊ¼»¯µÄthate£¨¿ÉÄÜ¼ÓÉÏÆäËûÒ»Ð©²ÎÊýÉ¶µÄ£¬ÔÝ²»È·¶¨£©
+¡¡¡¡Êä³ö£º    ³õÊ¼»¯µÄthate£¨³õÊ¼»¯ÎªÈ«1£©
 
 3.Batch_Gradient_Descent () :
-¡¡¡¡Ö÷Òª¹¤×÷£ºÔËÐÐÌÝ¶ÈÏÂ½µËã·¨£¬ÓÅ»¯²ÎÊýtheta¡£Í¬Ê±Ã¿´Îµü´úºó£¬¸ù¾Ýµ±Ç°theta¼ÆËãÎó²î			Öµ£¨Îó²îº¯Êý£©£¬ÃÜÇÐ¸ú×ÙÌÝ¶ÈÏÂ½µËã·¨£¬²¢ÒÔ´ËÀ´µ÷½Úµü´ú´ÎÊýNºÍÑ§Ï°ËÙ			ÂÊalpha¡£
-¡¡¡¡ÊäÈë£º	Xtrain£¬Ytrain£¬theta£¬
+¡¡¡¡Ö÷Òª¹¤×÷£ºÔËÐÐÅúÁ¿ÌÝ¶ÈÏÂ½µËã·¨£¬ÓÅ»¯²ÎÊýtheta¡£Í¬Ê±Ã¿´Îµü´úºó£¬¸ù¾Ýµ±Ç°theta¼ÆËã			Îó²îÖµJ£¨Îó²îº¯Êý£©£¬ÃÜÇÐ¸ú×ÙÌÝ¶ÈÏÂ½µËã·¨£¬²¢ÒÔ´ËÀ´µ÷½Úµü´ú´ÎÊýNºÍÑ§			Ï°ËÙÂÊalpha£¬ÒÔ¼°ÕýÔò»¯ÏµÊýlambda
+¡¡¡¡ÊäÈë£º	Xtrain£¬Ytrain£¬theta£¬lambda
 ¡¡¡¡Êä³ö£º	ÑµÁ·ºÃµÄtheta
 ¡¡¡¡
 4.Predication ():
 ¡¡¡¡Ö÷Òª¹¤×÷£º½«ÌÝ¶ÈÏÂ½µËã·¨ÑµÁ·³öµÄ²ÎÊýÖµtheta´øÈë²âÊÔ¼¯£¬¼ÆËãÔ¤²â½á¹û£¬²¢ÓëÕæÊµ½á			¹û½øÐÐ±È½Ï£¬µÃ³öÕýÈ·ÂÊ¡£
 ¡¡¡¡ÊäÈë£º	²ÎÊýtheta£¬Xtest£¬Ytest
-¡¡¡¡Êä³ö£ºNULL£¬»á´òÓ¡³ö·ÖÀàÕýÈ·ÂÊ
+¡¡¡¡Êä³ö£º	NULL£¬»á´òÓ¡³ö·ÖÀàÕýÈ·ÂÊ
 ¡¡¡¡
 Ps:ºóÐø»á¿¼ÂÇËæ»úÌÝ¶ÈÏÂ½µºÍÕýÔò»¯£¬µ±Ç°°æ±¾»¹Ã»ÓÐ
 
 Ps:Ê¹ÓÃmatplotÀ´»­Í¼£¬Ö±¹ÛÕ¹Ê¾Ñ§Ï°¹ý³Ì
+
+Ps:Ö½ÖÊ°æÉè¼ÆÊÖ²áµç×ÓÕÕÆ¬ÔÚ±¾ÏîÄ¿µÄphotoÎÄ¼þ¼ÐÖÐ

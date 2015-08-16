@@ -72,8 +72,10 @@ def Batch_Gradient_Descent (N, Xtrain, Ytrain, alpha, theta, lam) :
     print "Xtrain:",Xtrain.shape,"Ytrain:", Ytrain.shape,"theta:", theta.shape
     for i in range(N) :
         temp = numpy.dot( Xtrain.T, (sigmoid(Xtrain ,theta)-Ytrain) )
+        temp += (lam*theta)
+
         theta = theta - alpha/m*( temp )
-        J = getCost(Xtrain, Ytrain, theta, m)
+        J = getCost(Xtrain, Ytrain, theta, m) + regularization(lam, m, theta)
         print "i = ",i,"J = ",J
         count_I.append(i)
         count_J.append(J[0][0])
@@ -108,6 +110,15 @@ def getCost(Xtrain, Ytrain, theta, m) :
         J -= numpy.log(1+numpy.exp(-line))
     return -J/m
 
+def regularization(lam, m, theta) :
+    """
+    lam/2m * ( theta*theta - theta[0]**2 )
+    """
+    temp = lam/(2.0*m)
+    temp *= (numpy.dot(theta.T, theta)-theta[0][0]**2)
+    return temp
+
+
 def Predicition (Xtest, Ytest, theta) :
     """
     use theta which we have learned before to prediction in the test dataset.
@@ -124,8 +135,8 @@ def Predicition (Xtest, Ytest, theta) :
 
 
 Xtrain, Ytrain, Xtest, Ytest = Read_Data()
-N = 55000; alpha = 0.0003; lam = 0; # some control parameter
+N = 5000; alpha = 0.0003; lam = 0; # some control parameter
 theta = Initialization( Xtrain )
 theta = Batch_Gradient_Descent(N, Xtrain, Ytrain, alpha, theta, lam)
 Predicition(Xtest, Ytest, theta)
-print "end~ 76%"
+print "end~ max = 76%"
