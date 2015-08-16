@@ -66,25 +66,35 @@ def Batch_Gradient_Descent (N, Xtrain, Ytrain, alpha, theta, lam) :
     alpha is the speed of learning algorithm,lam is control regularization
     :return:The best theta we have find~
     """
-    m = Xtrain.shape[0]; count_I = []; count_J = [];
+    mtrain = Xtrain.shape[0]; count_I = []; count_Jtrain = [];
+    count_Jtest = []; mtest = Xtest.shape[0];
     print "------- Before Batch_Gradient_Descent -------"
     print "The parameter is: N=",N,"alpha=",alpha,"lam=",lam
     print "Xtrain:",Xtrain.shape,"Ytrain:", Ytrain.shape,"theta:", theta.shape
     for i in range(N) :
-        temp = numpy.dot( Xtrain.T, (sigmoid(Xtrain ,theta)-Ytrain) )
-        temp += (lam*theta)
 
-        theta = theta - alpha/m*( temp )
-        J = getCost(Xtrain, Ytrain, theta, m) + regularization(lam, m, theta)
-        print "i = ",i,"J = ",J
-        count_I.append(i)
-        count_J.append(J[0][0])
+        t = lam * theta
+        t[0][0] = 0  # t is for regularization
+        temp = numpy.dot( Xtrain.T, (sigmoid(Xtrain ,theta)-Ytrain) ) + t
+
+        theta = theta - alpha/mtrain*( temp )  # gradient descent
+        Jtrain = getCost(Xtrain, Ytrain, theta, mtrain) + regularization(lam, mtrain, theta)
+        Jtest  = getCost(Xtest , Ytest , theta, mtest ) + regularization(lam, mtest, theta)
+        print "i = ",i,"Jtrain = ",Jtrain,"Jtest = ",Jtest
+        if i%20 == 0:
+            count_I.append(i)
+            count_Jtrain.append(Jtrain[0][0])
+            count_Jtest.append(Jtest[0][0])
         #break
     #print "count_I:",count_I
     #print "count_J:",count_J
     #count_I = [1,2,3]
     #count_J = [1,4,9]
-    matplotlib.pyplot.plot(count_I, count_J)
+    matplotlib.pyplot.plot(count_I, count_Jtrain, label='train')
+
+    matplotlib.pyplot.ylabel('Cost')
+    matplotlib.pyplot.xlabel('Iterations')
+    matplotlib.pyplot.title('Different iterations for LR cost')
     matplotlib.pyplot.show()
     return theta
 
@@ -135,8 +145,8 @@ def Predicition (Xtest, Ytest, theta) :
 
 
 Xtrain, Ytrain, Xtest, Ytest = Read_Data()
-N = 5000; alpha = 0.0003; lam = 0; # some control parameter
+N = 500; alpha = 0.0003; lam = 0; # some control parameter
 theta = Initialization( Xtrain )
 theta = Batch_Gradient_Descent(N, Xtrain, Ytrain, alpha, theta, lam)
 Predicition(Xtest, Ytest, theta)
-print "end~ max = 76%"
+print "end~ max = 761194029%"
