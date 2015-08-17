@@ -34,19 +34,32 @@ LogisticRegression.pyµÄÊý¾ÝÀ´Ô´ÓÚLogisticRegressionÎÄ¼þ¼ÐÏÂµÄdataÎÄ¼þ¼Ð£¬ÆäÖÐ°üÀ
 ¡¡¡¡Êä³ö£º    ³õÊ¼»¯µÄthate£¨³õÊ¼»¯ÎªÈ«1£©
 
 3.Batch_Gradient_Descent () :
-¡¡¡¡Ö÷Òª¹¤×÷£ºÔËÐÐÅúÁ¿ÌÝ¶ÈÏÂ½µËã·¨£¬ÓÅ»¯²ÎÊýtheta¡£Í¬Ê±Ã¿´Îµü´úºó£¬¸ù¾Ýµ±Ç°theta¼ÆËã			Îó²îÖµJ£¨Îó²îº¯Êý£©£¬ÃÜÇÐ¸ú×ÙÌÝ¶ÈÏÂ½µËã·¨£¬²¢ÒÔ´ËÀ´µ÷½Úµü´ú´ÎÊýNºÍÑ§			Ï°ËÙÂÊalpha£¬ÒÔ¼°ÕýÔò»¯ÏµÊýlambda
+¡¡¡¡Ö÷Òª¹¤×÷£ºÔËÐÐÅúÁ¿ÌÝ¶ÈÏÂ½µËã·¨£¬ÓÅ»¯²ÎÊýtheta¡£Í¬Ê±Ã¿´Îµü´úºó£¬¸ù¾Ýµ±Ç°theta¼ÆËã			Îó²îÖµJ£¨Îó²îº¯Êý£©£¬ÃÜÇÐ¸ú×ÙÌÝ¶ÈÏÂ½µËã·¨£¬²¢ÒÔ´ËÀ´µ÷½Úµü´ú´ÎÊýNºÍÑ§			Ï°ËÙÂÊalpha£¬ÒÔ¼°ÕýÔò»¯ÏµÊýlambda¡£
+¡¡¡¡¡¡¡¡¡¡¡¡¡¡ Ps:ºóÀ´²»½ö¼ÆËãÁË²âÊÔ¼¯µÄ·ÖÀàÕýÈ·ÂÊ(accuracy)£¬»¹¼ÆËãÁËÑµÁ·¼¯µÄ·ÖÀàÕý			È·ÂÊ¡£Í¬Ê±¼ÆËã³öcost for train ºÍ cost for test.ÒÔ¼°ÑµÁ·¼¯µÄFÖµºÍ²âÊÔ¼¯µÄF			Öµ¡£
 ¡¡¡¡ÊäÈë£º	Xtrain£¬Ytrain£¬theta£¬lambda
-¡¡¡¡Êä³ö£º	ÑµÁ·ºÃµÄtheta
+¡¡¡¡Êä³ö£º	ÑµÁ·ºÃµÄtheta£¬ºÍÒ»´ó¶Ñ¼ÇÂ¼Êý¾Ý(count_for_accuracy_F_and_Jcost_for_train_a
+¡¡¡¡¡¡¡¡¡¡¡¡¡¡ nd_test).
 ¡¡¡¡
 4.Predication ():
 ¡¡¡¡Ö÷Òª¹¤×÷£º½«ÌÝ¶ÈÏÂ½µËã·¨ÑµÁ·³öµÄ²ÎÊýÖµtheta´øÈë²âÊÔ¼¯£¬¼ÆËãÔ¤²â½á¹û£¬²¢ÓëÕæÊµ½á			¹û½øÐÐ±È½Ï£¬µÃ³öÕýÈ·ÂÊ¡£
 ¡¡¡¡ÊäÈë£º	²ÎÊýtheta£¬Xtest£¬Ytest
 ¡¡¡¡Êä³ö£º	NULL£¬»á´òÓ¡³ö·ÖÀàÕýÈ·ÂÊ
 ¡¡¡¡
-Ps:ºóÐø»á¿¼ÂÇËæ»úÌÝ¶ÈÏÂ½µºÍÕýÔò»¯£¬µ±Ç°°æ±¾»¹Ã»ÓÐ
+5.Regularization():
+¡¡¡¡Ö÷Òª¹¤×÷£º×öÕýÔò»¯£¬·ÀÖ¹logistic regression¹ýÄâºÏ£¬Í¬Ê±¾¡¿ÉÄÜ¼Ó¿ìÆäÊÕÁ²¡£¹«Ê½¼ûÉè			¼ÆÊÖ²áÕÕÆ¬
+¡¡¡¡ÊäÈë£º    lambda, m, theta£¬·Ö±ðÊÇÕýÔò»¯ÏµÊý£¨¿ØÖÆÕýÔò»¯³Ì¶ÈµÄ£¬¿ÉÒÔ¿´³É¿ª¹Ø£©£¬Êý			¾Ý¼¯ÊýÄ¿£¬µ±Ç°µÄ²ÎÊý
+¡¡¡¡Êä³ö£º    Ò»¸öÖµ£¬¼Óµ½cost functionÉÏ£¬ÓÃÀ´ÊµÏÖÕýÔò»¯¡£
+¡¡¡¡
 
-Ps:Ê¹ÓÃmatplotÀ´»­Í¼£¬Ö±¹ÛÕ¹Ê¾Ñ§Ï°¹ý³Ì
+
+Ps:ºóÐø»á¿¼ÂÇËæ»úÌÝ¶ÈÏÂ½µºÍÕýÔò»¯£¬µ±Ç°°æ±¾»¹Ã»ÓÐ¡ª¡ªÕýÔò»¯ÒÑ¾­¼ÓÁË
+
+Ps:Ê¹ÓÃmatplotÀ´»­Í¼£¬Ö±¹ÛÕ¹Ê¾Ñ§Ï°¹ý³Ì¡ª¡ª»­FÖµ£¬Jcost£¬accuracyµÄ±ä»¯Í¼¡£
 
 Ps:Ö½ÖÊ°æÉè¼ÆÊÖ²áµç×ÓÕÕÆ¬ÔÚ±¾ÏîÄ¿µÄphotoÎÄ¼þ¼ÐÖÐ
 
-Ps:×öÁËregularizationÖ®ºó£¬×¼È·ÂÊÌá¸ßÁË£¬Õâ¸ö¿ÉÒÔÀí½â£¬µ«ÊÇcost functionÒ²ÏÂ½µÁË£¬Õâ¸öºÜÆæ¹Ö
+Ps:×öÁËregularizationÖ®ºó£¬×¼È·ÂÊÌá¸ßÁË£¬Õâ¸ö¿ÉÒÔÀí½â£¬µ«ÊÇcost functionÈ´Ò²Í¬Ê±ÏÂ½µÁË£¬Õâ¸öºÜÆæ¹Ö£¬²»ÊÇÓ¦¸Ãcost functionÔö¼ÓÃ´
+
+Ps:Ñ§Ï°ËÙÂÊalpha¹ý´ó»áµ¼ÖÂÑ§Ï°ÇúÏßÉÏÏÂÕðµ´£¡
+
+Ps:¼ÓÕýÔò»¯Ã²ËÆ¿ÉÒÔ¼Ó¿ìÊÕÁ²ËÙ¶È¡£¡£¡£Ò²ÄÜ·ÀÖ¹¹ýÄâºÏ£¨²»¹ý±¾ÀýÖÐÃ»ÓÐµÃµ½ÌåÏÖ£©

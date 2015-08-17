@@ -66,11 +66,13 @@ def Batch_Gradient_Descent (N, Xtrain, Ytrain, alpha, theta, lam) :
     alpha is the speed of learning algorithm,lam is control regularization
     :return:The best theta we have find~
     """
-    mtrain = Xtrain.shape[0]; count_I = []; count_Jtrain = [];
-    count_Jtest = []; mtest = Xtest.shape[0];
+    mtrain, mtest = Xtrain.shape[0], Xtest.shape[0];
+    count_I, count_Jtrain, count_Jtest = [], [], [];
+    count_accuracy_train, count_accuracy_test = [], [];
+    count_f_train, count_f_test = [], [];
     print "------- Before Batch_Gradient_Descent -------"
     print "The parameter is: N=",N,"alpha=",alpha,"lam=",lam
-    print "Xtrain:",Xtrain.shape,"Ytrain:", Ytrain.shape,"theta:", theta.shape
+    #print "Xtrain:",Xtrain.shape,"Ytrain:", Ytrain.shape,"theta:", theta.shape
     for i in range(N) :
 
         t = lam * theta
@@ -78,25 +80,22 @@ def Batch_Gradient_Descent (N, Xtrain, Ytrain, alpha, theta, lam) :
         temp = numpy.dot( Xtrain.T, (sigmoid(Xtrain ,theta)-Ytrain) ) + t
 
         theta = theta - alpha/mtrain*( temp )  # gradient descent
+
         Jtrain = getCost(Xtrain, Ytrain, theta, mtrain) + regularization(lam, mtrain, theta)
         Jtest  = getCost(Xtest , Ytest , theta, mtest ) + regularization(lam, mtest, theta)
-        print "i = ",i,"Jtrain = ",Jtrain,"Jtest = ",Jtest
-        if i%20 == 0:
+        accuracy_train, f_train = Predicition(Xtrain, Ytrain, theta)
+        accuracy_test , f_test  = Predicition(Xtest , Ytest , theta)
+        print "i = ",i,"Jtrain = ",Jtrain,"Jtest = ",Jtest,"accuracyTrain=",accuracy_train,"accuracyTest=",accuracy_test,"Ftrain",f_train,"Ftest",f_test
+        if i % 1 == 0:
             count_I.append(i)
             count_Jtrain.append(Jtrain[0][0])
             count_Jtest.append(Jtest[0][0])
-        #break
-    #print "count_I:",count_I
-    #print "count_J:",count_J
-    #count_I = [1,2,3]
-    #count_J = [1,4,9]
-    matplotlib.pyplot.plot(count_I, count_Jtrain, label='train')
+            count_accuracy_train.append(100*accuracy_train)
+            count_accuracy_test.append(100*accuracy_test)
+            count_f_train.append(100*f_train)
+            count_f_test.append( 100*f_test )
 
-    matplotlib.pyplot.ylabel('Cost')
-    matplotlib.pyplot.xlabel('Iterations')
-    matplotlib.pyplot.title('Different iterations for LR cost')
-    matplotlib.pyplot.show()
-    return theta
+    return theta, count_I, count_Jtrain, count_Jtest, count_accuracy_train, count_accuracy_test, count_f_train, count_f_test
 
 def sigmoid(Xtrain, theta) :
     """
@@ -129,24 +128,43 @@ def regularization(lam, m, theta) :
     return temp
 
 
-def Predicition (Xtest, Ytest, theta) :
+def Predicition (X, Y, theta) :
     """
     use theta which we have learned before to prediction in the test dataset.
     just calculate Xtest*theta, if the value is >0 then return 1 else return 0,
     at least,we calculate the accuracy.
     """
-    print "In predicition:",Xtest.shape,Ytest.shape,theta.shape
-    pre = numpy.array([[ 1 if x>0 else 0 for x in numpy.dot(Xtest, theta) ]]).T
-    print pre
-    print Ytest
-    print numpy.sum((pre == Ytest))/float(Xtest.shape[0])
-
+    #print "In predicition:",Xtest.shape,Ytest.shape,theta.shape
+    pre = numpy.array([[ 1 if key>0 else 0 for key in numpy.dot(X, theta) ]]).T
+    pre_matrix =  numpy.hstack( [Y, pre]) # real - pre
+    count_tp, count_fn, count_fp = 0, 0, 0
+    for key in (pre_matrix) :
+        if key[0]==1 and key[1]==1 :
+            count_tp += 1
+        elif key[0]==1 and key[1]==0 :
+            count_fn += 1
+        elif key[0]==0 and key[1]==1 :
+            count_fp += 1
+    p = float(count_tp)/(count_tp+count_fp)
+    r = float(count_tp)/(count_tp+count_fn)
+    return numpy.sum((pre == Y))/float(X.shape[0]),2.0*p*r/(p+r)
 
 
 
 Xtrain, Ytrain, Xtest, Ytest = Read_Data()
-N = 500; alpha = 0.0003; lam = 0; # some control parameter
+N = 250000; alpha = 0.0004; lam = 400; # some control parameter
 theta = Initialization( Xtrain )
-theta = Batch_Gradient_Descent(N, Xtrain, Ytrain, alpha, theta, lam)
-Predicition(Xtest, Ytest, theta)
-print "end~ max = 761194029%"
+theta, count_I, count_Jtrain, count_Jtest, count_accuracy_train, count_accuracy_test, count_f_train, count_f_test = Batch_Gradient_Descent(N, Xtrain, Ytrain, alpha, theta, lam)
+print "end, max accuracy = 761194029%"
+
+p1, = matplotlib.pyplot.plot(count_I, count_Jtrain)
+p2, = matplotlib.pyplot.plot(count_I, count_Jtest )
+p3, = matplotlib.pyplot.plot(count_I, count_accuracy_train)
+p4, = matplotlib.pyplot.plot(count_I, count_accuracy_test)
+p5, = matplotlib.pyplot.plot(count_I, count_f_train)
+p6, = matplotlib.pyplot.plot(count_I, count_f_test)
+matplotlib.pyplot.ylabel('Cost')
+matplotlib.pyplot.xlabel('Iterations')
+matplotlib.pyplot.title('Different iterations for LR cost and accuracy:N=%d,alpha=%f,lambda=%f' %(N,alpha,lam))
+matplotlib.pyplot.legend([p1, p2, p3, p4, p5, p6], ["Jtrain", "Jtest", "accuracyTrain", "accuracyTest", "FTrain", "FTest"])
+matplotlib.pyplot.show()
